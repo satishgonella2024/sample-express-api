@@ -4,8 +4,14 @@ const mongoose = require('mongoose');
 const { limiter } = require('./middleware/rateLimiter');
 const userRoutes = require('./routes/userRoutes');
 const authRoutes = require('./routes/authRoutes');
+const swaggerUi = require('swagger-ui-express');
+const swaggerSpec = require('./config/swagger');
+
 
 const app = express();
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 
 // Middleware
 app.use(express.json());
